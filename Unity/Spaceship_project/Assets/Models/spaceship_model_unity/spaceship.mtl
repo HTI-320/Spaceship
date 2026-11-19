@@ -1,0 +1,35 @@
+newmtl Hull_Silver
+Ka 0.12 0.13 0.15
+Kd 0.62 0.66 0.70
+Ks 0.35 0.35 0.38
+Ns 80
+
+newmtl Hull_Dark
+Ka 0.04 0.05 0.07
+Kd 0.12 0.15 0.19
+Ks 0.25 0.28 0.32
+Ns 60
+
+newmtl Canopy_Blue
+Ka 0.01 0.03 0.06
+Kd 0.025 0.08 0.14
+Ks 0.65 0.75 0.85
+Ns 180
+
+newmtl Accent_Red
+Ka 0.10 0.02 0.01
+Kd 0.72 0.10 0.07
+Ks 0.30 0.20 0.18
+Ns 70
+
+newmtl Engine_Dark
+Ka 0.02 0.025 0.04
+Kd 0.07 0.09 0.13
+Ks 0.35 0.38 0.45
+Ns 100
+
+newmtl Engine_Glow
+Ka 0.15 0.45 0.90
+Kd 0.10 0.55 1.00
+Ks 0.80 0.90 1.00
+Ns 200
