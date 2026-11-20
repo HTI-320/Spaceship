@@ -3,7 +3,7 @@ using UnityEngine;
 public class AsteroidSpawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    public GameObject asteroidPrefab;
+    public GameObject[] asteroidPrefabs;
     public float spawnInterval = 2.5f;
 
     [Header("Distance Around Player")]
@@ -29,7 +29,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     void Update()
     {
-        if (player == null || asteroidPrefab == null)
+        if (player == null || asteroidPrefabs == null || asteroidPrefabs.Length == 0)
             return;
 
         timer += Time.deltaTime;
@@ -43,11 +43,15 @@ public class AsteroidSpawner : MonoBehaviour
 
     void SpawnAsteroid()
     {
+        // Pick a random asteroid prefab from the array
+        int randomIndex = Random.Range(0, asteroidPrefabs.Length);
+        GameObject prefabToSpawn = asteroidPrefabs[randomIndex];
+
         // Pick a random direction in 3D space and place it in a hollow shell around the player
         Vector3 randomDirection = Random.onUnitSphere;
         float spawnDistance = Random.Range(minSpawnDistance, maxSpawnDistance);
         Vector3 spawnPosition = player.position + (randomDirection * spawnDistance);
 
-        Instantiate(asteroidPrefab, spawnPosition, Random.rotation);
+        Instantiate(prefabToSpawn, spawnPosition, Random.rotation);
     }
 }

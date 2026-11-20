@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5576979593838806548}
   - component: {fileID: 5576504192743547408}
   - component: {fileID: 7943457093837738518}
+  - component: {fileID: -7732679207508041298}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Asteroid
@@ -107,7 +108,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -127,3 +128,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AsteroidMovement
   moveSpeed: 3
   tumbleSpeed: 40
+--- !u!114 &-7732679207508041298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6704691128403397457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cae0c59c46d236428ec43458a4822a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Asteroid
+  health: 1
