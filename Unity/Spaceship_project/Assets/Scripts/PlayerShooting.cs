@@ -3,12 +3,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerShooting : MonoBehaviour
 {
+    [Header("LCD Display")]
+    [SerializeField] private ArduinoController arduinoController;
+
     [Header("Shooting Settings")]
     public GameObject laserPrefab;
     public Transform firePoint;
     public float fireCooldown = 0.2f;
 
     private float nextFireTime = 0f;
+    private int shotsFired;
+
+    void Awake()
+    {
+        if (arduinoController == null)
+            arduinoController = FindFirstObjectByType<ArduinoController>();
+    }
 
     void Update()
     {
@@ -28,5 +38,8 @@ public class PlayerShooting : MonoBehaviour
         {
             Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
         }
+
+        shotsFired++;
+        arduinoController?.SendToLCD("Shots: " + shotsFired);
     }
 }
