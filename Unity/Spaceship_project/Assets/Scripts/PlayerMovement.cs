@@ -58,8 +58,11 @@ public class PlayerMovement : MonoBehaviour
             bankSmoothness * Time.deltaTime
         );
 
-        // Move forward
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        // Move forward if space key is pressed
+        if (Keyboard.current.spaceKey.isPressed)
+        {
+            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        }
     }
 
     void LateUpdate()
