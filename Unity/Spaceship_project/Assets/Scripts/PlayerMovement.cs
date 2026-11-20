@@ -36,10 +36,10 @@ public class PlayerMovement : MonoBehaviour
             yawInput = 1f;
 
         if (Keyboard.current.wKey.isPressed)
-            pitchInput = 1f;
+            pitchInput = -1f;
 
         if (Keyboard.current.sKey.isPressed)
-            pitchInput = -1f;
+            pitchInput = 1f;
 
         // Rotate spaceship
         transform.Rotate(
@@ -59,10 +59,10 @@ public class PlayerMovement : MonoBehaviour
         );
 
         // Move forward if space key is pressed
-        if (Keyboard.current.spaceKey.isPressed)
-        {
-            transform.position += transform.forward * moveSpeed * Time.deltaTime;
-        }
+        //if (Keyboard.current.spaceKey.isPressed)
+       // {
+        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+       // }
     }
 
     void LateUpdate()
