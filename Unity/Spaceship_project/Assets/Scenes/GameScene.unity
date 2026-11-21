@@ -10466,7 +10466,6 @@ GameObject:
   - component: {fileID: 761734360}
   - component: {fileID: 761734359}
   - component: {fileID: 761734361}
-  - component: {fileID: 761734362}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10524,14 +10523,6 @@ MonoBehaviour:
   firePoint: {fileID: 218209977}
   firePoint2: {fileID: 1616159965}
   fireCooldown: 0.2
---- !u!81 &761734362
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761734358}
-  m_Enabled: 1
 --- !u!1001 &1004349661
 PrefabInstance:
   m_ObjectHideFlags: 0
