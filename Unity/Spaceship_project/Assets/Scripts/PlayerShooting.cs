@@ -6,6 +6,7 @@ public class PlayerShooting : MonoBehaviour
     [Header("Shooting Settings")]
     public GameObject laserPrefab;
     public Transform firePoint;
+    public Transform firePoint2;
     public float fireCooldown = 0.2f;
 
     private float nextFireTime = 0f;
@@ -27,6 +28,7 @@ public class PlayerShooting : MonoBehaviour
         if (laserPrefab != null && firePoint != null)
         {
             Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
+            Instantiate(laserPrefab, firePoint2.position, firePoint2.rotation);
         }
     }
 }
