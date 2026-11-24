@@ -1,34 +1,30 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerShooting : MonoBehaviour
 {
-    [Header("Shooting Settings")]
-    public GameObject laserPrefab;
+    public ArduinoController controller;
+    public GameObject bulletPrefab;
     public Transform firePoint;
-    public Transform firePoint2;
-    public float fireCooldown = 0.2f;
+    public float fireRate = 0.2f;
 
-    private float nextFireTime = 0f;
+    private float nextFireTime;
+
+    void Awake()
+    {
+        if (controller == null)
+            controller = GetComponent<ArduinoController>();
+    }
 
     void Update()
     {
-        bool mouseFire = Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
-        bool keyFire = Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame;
+        if (controller == null) return;
 
-        if ((mouseFire || keyFire) && Time.time >= nextFireTime)
+        if (controller.FireInput && Time.time >= nextFireTime)
         {
-            Shoot();
-            nextFireTime = Time.time + fireCooldown;
-        }
-    }
+            nextFireTime = Time.time + fireRate;
 
-    void Shoot()
-    {
-        if (laserPrefab != null && firePoint != null)
-        {
-            Instantiate(laserPrefab, firePoint.position, firePoint.rotation);
-            Instantiate(laserPrefab, firePoint2.position, firePoint2.rotation);
+            if (bulletPrefab != null && firePoint != null)
+                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         }
     }
 }

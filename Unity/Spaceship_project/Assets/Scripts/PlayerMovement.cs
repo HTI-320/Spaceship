@@ -1,11 +1,12 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
-
 {
+    public ArduinoController controller;
+
     public float YawInput => yawInput;
     public float PitchInput => pitchInput;
+
     [Header("Movement")]
     public float moveSpeed = 20f;
 
@@ -23,25 +24,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current == null)
+        if (controller == null)
+        {
+            Debug.LogError("Controller puuttuu!");
             return;
+        }
 
-        yawInput = 0f;
-        pitchInput = 0f;
+        Vector2 move = controller.MoveInput;
 
-        if (Keyboard.current.aKey.isPressed)
-            yawInput = -1f;
+        yawInput = move.x;          // tatti vasen/oikea
+        pitchInput = -move.y;       // tatti ylös/alas (käännä merkki, jos tuntuu väärin päin)
 
-        if (Keyboard.current.dKey.isPressed)
-            yawInput = 1f;
-
-        if (Keyboard.current.wKey.isPressed)
-            pitchInput = -1f;
-
-        if (Keyboard.current.sKey.isPressed)
-            pitchInput = 1f;
-
-        // Rotate spaceship
         transform.Rotate(
             pitchInput * pitchSpeed * Time.deltaTime,
             yawInput * yawSpeed * Time.deltaTime,
@@ -49,29 +42,14 @@ public class PlayerMovement : MonoBehaviour
             Space.Self
         );
 
-        // Calculate banking
         float targetBank = yawInput * maxBankAngle;
+        currentBank = Mathf.Lerp(currentBank, targetBank, bankSmoothness * Time.deltaTime);
 
-        currentBank = Mathf.Lerp(
-            currentBank,
-            targetBank,
-            bankSmoothness * Time.deltaTime
-        );
-
-        // Move forward if space key is pressed
-        //if (Keyboard.current.spaceKey.isPressed)
-       // {
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
-       // }
     }
 
     void LateUpdate()
     {
-        // Apply bank to local Z axis
-        transform.localRotation *= Quaternion.Euler(
-            0f,
-            0f,
-            currentBank
-        );
+        transform.localRotation *= Quaternion.Euler(0f, 0f, currentBank);
     }
 }
