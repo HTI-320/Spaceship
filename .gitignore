@@ -20,6 +20,7 @@ Assets/AssetStoreTools*
 .vs/
 .idea/
 .gradle/
+.vscode/
 
 # Auto-generated project files
 *.csproj
