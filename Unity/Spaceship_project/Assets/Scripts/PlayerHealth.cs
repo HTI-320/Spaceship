@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 3;
-    public GameObject gameOverUI; // Optional: assign a UI panel later
+    public GameObject gameOverUI;
 
     private int currentHealth;
 
@@ -20,7 +21,6 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Spaceship Health: " + currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -33,20 +33,27 @@ public class PlayerHealth : MonoBehaviour
         if (other.CompareTag("Asteroid"))
         {
             TakeDamage(1);
-            Destroy(other.gameObject); // Destroy the asteroid on impact so it doesn't hit twice
+            Destroy(other.gameObject);
         }
     }
 
     void Die()
     {
-        Debug.Log("GAME OVER");
-
         if (gameOverUI != null)
         {
             gameOverUI.SetActive(true);
         }
 
-        // Disables movement, shooting, and hides the ship without breaking camera references
+        if (Camera.main != null)
+        {
+            Camera.main.transform.SetParent(null);
+        }
+
         gameObject.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
