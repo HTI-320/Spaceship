@@ -10879,6 +10879,7 @@ GameObject:
   - component: {fileID: 761734362}
   - component: {fileID: 761734363}
   - component: {fileID: 761734364}
+  - component: {fileID: 761734365}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10898,6 +10899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9385fb2b5d324c8478965e81f5bff252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  controller: {fileID: 761734365}
   moveSpeed: 10
   yawSpeed: 40
   pitchSpeed: 40
@@ -10932,10 +10934,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbdf0144af08114c813baf4ef48c155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooting
-  laserPrefab: {fileID: 857633603822247871, guid: b6f9349c0ce32ce47a8ad2a9ac29dc44, type: 3}
+  controller: {fileID: 761734365}
+  bulletPrefab: {fileID: 857633603822247871, guid: b6f9349c0ce32ce47a8ad2a9ac29dc44, type: 3}
   firePoint: {fileID: 218209977}
-  firePoint2: {fileID: 1616159965}
-  fireCooldown: 0.2
+  fireRate: 0.2
 --- !u!114 &761734362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10950,6 +10952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 3
   gameOverUI: {fileID: 1257130786}
+  controller: {fileID: 0}
 --- !u!65 &761734363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10998,6 +11001,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &761734365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761734358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c53399a46df674e89d17e48145fd5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArduinoController
+  portName: COM3
+  baudRate: 115200
+  deadzone: 0.15
 --- !u!1 &832277790
 GameObject:
   m_ObjectHideFlags: 0
