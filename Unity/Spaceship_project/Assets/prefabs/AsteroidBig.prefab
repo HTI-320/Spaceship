@@ -408,5 +408,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Asteroid
   health: 6
-  scoreValue: 5
+  scoreValue: 100
   healthBarFill: {fileID: 7214146944591142319}

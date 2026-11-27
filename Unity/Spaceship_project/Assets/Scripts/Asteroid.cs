@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Asteroid : MonoBehaviour
 {
-    public int health = 3;
+    public int health = 1;
     public int scoreValue = 1;
     public Image healthBarFill;
 
@@ -12,15 +12,6 @@ public class Asteroid : MonoBehaviour
     void Start()
     {
         maxHealth = health;
-
-        if (healthBarFill != null && maxHealth <= 1)
-        {
-            Canvas canvas = healthBarFill.GetComponentInParent<Canvas>();
-            if (canvas != null)
-            {
-                canvas.gameObject.SetActive(false);
-            }
-        }
     }
 
     public void TakeDamage(int damage)

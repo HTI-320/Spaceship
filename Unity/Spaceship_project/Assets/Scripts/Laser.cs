@@ -8,7 +8,6 @@ public class Laser : MonoBehaviour
 
     void Start()
     {
-        // Automatically remove the laser after a few seconds if it misses
         Destroy(gameObject, lifetime);
     }
 
@@ -19,15 +18,15 @@ public class Laser : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Asteroid"))
+        if (other.CompareTag("Asteroid") || other.CompareTag("BlackHole"))
         {
-            // Look for the Asteroid script on the hit object and apply damage
-            if (other.TryGetComponent(out Asteroid asteroid))
+            Asteroid target = other.GetComponentInParent<Asteroid>();
+            if (target != null)
             {
-                asteroid.TakeDamage(damage);
+                target.TakeDamage(damage);
             }
 
-            Destroy(gameObject); // Always destroy the laser on hit
+            Destroy(gameObject);
         }
     }
 }

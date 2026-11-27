@@ -30,10 +30,15 @@ public class PlayerHealth : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Asteroid"))
         {
             TakeDamage(1);
             Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("BlackHole"))
+        {
+            TakeDamage(maxHealth); // Instant Game Over
         }
     }
 
