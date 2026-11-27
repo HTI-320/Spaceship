@@ -15,20 +15,23 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        UpdateScoreUI();
+        UpdateScoreUI(true);
     }
 
     public void AddScore(int points)
     {
         currentScore += points;
-        UpdateScoreUI();
+        UpdateScoreUI(false);
     }
 
-    void UpdateScoreUI()
+    void UpdateScoreUI(bool force)
     {
         if (scoreText != null)
         {
             scoreText.text = "Score: " + currentScore;
         }
+
+        if (ArduinoInput.Instance != null)
+            ArduinoInput.Instance.SendScore(currentScore, force);
     }
 }
