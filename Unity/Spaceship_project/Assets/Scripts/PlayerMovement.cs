@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
-
 {
     public float YawInput => yawInput;
     public float PitchInput => pitchInput;
+
     [Header("Movement")]
     public float moveSpeed = 20f;
 
@@ -23,23 +23,32 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current == null)
-            return;
-
         yawInput = 0f;
         pitchInput = 0f;
 
-        if (Keyboard.current.aKey.isPressed)
-            yawInput = -1f;
+        // Left joystick
+        if (ArduinoInput.Instance != null)
+        {
+            Vector2 stick = ArduinoInput.Instance.Move1;
+            yawInput = stick.x;
+            pitchInput = stick.y;   // stick up = -1 = nose up (same as W). Use invertY1 if reversed.
+        }
 
-        if (Keyboard.current.dKey.isPressed)
-            yawInput = 1f;
+        // Keyboard fallback (overrides the joystick while a key is held)
+        if (Keyboard.current != null)
+        {
+            if (Keyboard.current.aKey.isPressed)
+                yawInput = -1f;
 
-        if (Keyboard.current.wKey.isPressed)
-            pitchInput = -1f;
+            if (Keyboard.current.dKey.isPressed)
+                yawInput = 1f;
 
-        if (Keyboard.current.sKey.isPressed)
-            pitchInput = 1f;
+            if (Keyboard.current.wKey.isPressed)
+                pitchInput = -1f;
+
+            if (Keyboard.current.sKey.isPressed)
+                pitchInput = 1f;
+        }
 
         // Rotate spaceship
         transform.Rotate(
@@ -58,11 +67,8 @@ public class PlayerMovement : MonoBehaviour
             bankSmoothness * Time.deltaTime
         );
 
-        // Move forward if space key is pressed
-        //if (Keyboard.current.spaceKey.isPressed)
-       // {
+        // Always move forward
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
-       // }
     }
 
     void LateUpdate()

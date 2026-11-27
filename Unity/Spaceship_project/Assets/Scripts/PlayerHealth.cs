@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        SendHealthToArduino(true);
 
         if (gameOverUI != null)
         {
@@ -21,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0);
+        SendHealthToArduino(false);
 
         if (currentHealth <= 0)
         {
@@ -35,6 +38,12 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(1);
             Destroy(other.gameObject);
         }
+    }
+
+    void SendHealthToArduino(bool force)
+    {
+        if (ArduinoInput.Instance != null)
+            ArduinoInput.Instance.SendHealth(currentHealth, force);
     }
 
     void Die()
